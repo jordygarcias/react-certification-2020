@@ -1,9 +1,17 @@
 import React from 'react';
+import MyThemeProvider from '../../providers/Theme';
+import { GlobalStyles } from '../Theme/globalStyles';
+import MainAppBar from '../AppBar';
 
-import './Layout.styles.css';
-
-function Layout({ children }) {
-  return <main className="container">{children}</main>;
-}
+const Layout = () => {
+  return (
+    <MyThemeProvider>
+      <>
+        <GlobalStyles />
+        <MainAppBar />
+      </>
+    </MyThemeProvider>
+  );
+};
 
 export default Layout;
