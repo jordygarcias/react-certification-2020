@@ -32,7 +32,7 @@ const MainAppBar = () => {
   const logoSrc = theme === LIGHT_THEME ? lightLogo : darkLogo;
 
   return (
-    <AppBar position="static" className={{ root: 'appBar' }}>
+    <AppBar position="static">
       <Toolbar className={classes.toolbar}>
         <div className={classes.iconContainer}>
           <img className={classes.icon} src={logoSrc} alt="wizetube logo" />

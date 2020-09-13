@@ -4,6 +4,7 @@ export const lightTheme = {
   textColor: '#505050',
   secondaryTextColor: '#979797',
   backgroundColor: '#EFEFEF',
+  searchBarBorderColor: '#DBDBDB',
   searchBarColor: '#FDFDFD',
   searchBarButtonColor: '#EFEFEF',
 };
@@ -14,6 +15,7 @@ export const darkTheme = {
   textColor: '#fff',
   secondaryTextColor: '#E3E3E3',
   backgroundColor: '#7A7A7A',
+  searchBarBorderColor: '#636363',
   searchBarColor: '#3A3A3A',
   searchBarButtonColor: '#2E2E2E',
 };
