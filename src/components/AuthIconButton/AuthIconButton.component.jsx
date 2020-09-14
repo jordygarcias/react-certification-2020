@@ -35,8 +35,8 @@ const AuthIconButton = () => {
           horizontal: 'right',
         }}
       >
-        {!authenticated && <MenuItem>Iniciar Sesión</MenuItem>}
-        {authenticated && <MenuItem>Cerrar Sesión</MenuItem>}
+        {!authenticated && <MenuItem>Sign in</MenuItem>}
+        {authenticated && <MenuItem>Sign out</MenuItem>}
       </Menu>
     </>
   );

@@ -1,6 +1,6 @@
 import { IconButton, InputBase, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const SearchBar = styled(Paper)`
@@ -31,12 +31,17 @@ const SearchButton = styled(IconButton)`
   }
 `;
 
-const SearchBoxLayout = ({ children }) => {
+const SearchBoxLayout = ({ children, onSearch }) => {
+  const [searchText, setSearchText] = useState('');
+
   return (
     <>
       <SearchBar component="form">
-        <SearchInput placeholder="Buscar" />
-        <SearchButton>
+        <SearchInput
+          onChange={(event) => setSearchText(event.target.value)}
+          placeholder="Search"
+        />
+        <SearchButton onClick={() => onSearch(searchText)}>
           <SearchIcon />
         </SearchButton>
       </SearchBar>

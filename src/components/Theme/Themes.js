@@ -7,6 +7,8 @@ export const lightTheme = {
   searchBarBorderColor: '#DBDBDB',
   searchBarColor: '#FDFDFD',
   searchBarButtonColor: '#EFEFEF',
+  navigationBarBackground: '#DEDEDE',
+  navigationBarColor: '#1B6D9C',
 };
 
 export const darkTheme = {
@@ -18,4 +20,6 @@ export const darkTheme = {
   searchBarBorderColor: '#636363',
   searchBarColor: '#3A3A3A',
   searchBarButtonColor: '#2E2E2E',
+  navigationBarBackground: '#292929',
+  navigationBarColor: '#03A2FF',
 };

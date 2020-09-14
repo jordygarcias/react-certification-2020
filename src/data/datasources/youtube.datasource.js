@@ -14,11 +14,13 @@ export const youtubeApi = axios.create({
 
 const YoutubeDataSource = {
   getVideos: (searchText) => {
-    return youtubeApi.get('/search', {
-      params: {
-        q: searchText,
-      },
-    });
+    return youtubeApi
+      .get('/search', {
+        params: {
+          q: searchText,
+        },
+      })
+      .then((res) => res.data.items);
   },
 };
 
