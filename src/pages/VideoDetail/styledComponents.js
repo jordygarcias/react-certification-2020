@@ -1,9 +1,14 @@
+import { Grid } from '@material-ui/core';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 
 export const Player = styled(ReactPlayer)`
   width: 100% !important;
   height: 250px !important;
+
+  @media (min-width: 800px) {
+    height: 500px !important;
+  }
 `;
 
 export const VideoTitle = styled.h1`
@@ -48,4 +53,12 @@ export const RelatedVideoChannelTitle = styled.h2`
   font-size: 13px;
   margin-top: 5px;
   color: ${({ theme }) => theme.videoCardChannelTextColor};
+`;
+
+export const RelatedGrid = styled(Grid)`
+  @media (min-width: 800px) {
+    padding: 0px 10px;
+    height: calc(100vh - 90px);
+    overflow-y: auto;
+  }
 `;

@@ -10,6 +10,7 @@ const SearchBar = styled(Paper)`
     display: flex;
     box-shadow: 0px 0px 0px;
     border-bottom: 1px solid ${({ theme }) => theme.searchBarBorderColor};
+    height: 50px;
   }
 `;
 
@@ -31,19 +32,28 @@ const SearchButton = styled(IconButton)`
   }
 `;
 
-const SearchBoxLayout = ({ children, onSearch }) => {
+const SearchBoxLayout = ({ children, onSearch, searchOnType }) => {
   const [searchText, setSearchText] = useState('');
+
+  const handleSearchTextChange = (value) => {
+    setSearchText(value);
+    if (searchOnType) {
+      onSearch(value);
+    }
+  };
 
   return (
     <>
       <SearchBar component="form">
         <SearchInput
-          onChange={(event) => setSearchText(event.target.value)}
-          placeholder="Search"
+          onChange={(event) => handleSearchTextChange(event.target.value)}
+          placeholder={searchOnType ? 'Filter' : 'Search'}
         />
-        <SearchButton onClick={() => onSearch(searchText)}>
-          <SearchIcon />
-        </SearchButton>
+        {!searchOnType && (
+          <SearchButton onClick={() => onSearch(searchText)}>
+            <SearchIcon />
+          </SearchButton>
+        )}
       </SearchBar>
       {children}
     </>

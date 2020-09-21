@@ -28,6 +28,16 @@ const AuthLocalDataSource = {
   deAuthenticate: () => {
     storage.remove(AUTH_STORAGE_KEY);
   },
+
+  updateFavorites: (user) => {
+    storage.set(AUTH_STORAGE_KEY, user);
+    const users = storage.get(USERS_STORAGE_KEY);
+    const authIndex = users.findIndex(
+      (u) => u.username === user.username && u.password === user.password
+    );
+    users[authIndex] = user;
+    storage.set(USERS_STORAGE_KEY, users);
+  },
 };
 
 export { AuthLocalDataSource };

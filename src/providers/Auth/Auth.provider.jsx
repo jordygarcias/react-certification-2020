@@ -19,18 +19,33 @@ function useAuth() {
 function AuthProvider({ children }) {
   const datasource = AuthLocalDataSource;
   const [authenticated, setAuthenticated] = useState(false);
+  const [authUser, setAuthUser] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
     const lastAuthState = datasource.getActiveSession();
     const isAuthenticated = Boolean(lastAuthState);
+    setAuthUser(lastAuthState);
     setAuthenticated(isAuthenticated);
   }, [datasource]);
 
+  const toggleFavorite = (video) => {
+    const favoriteIndex = authUser.favorites.findIndex(
+      (f) => f.id.videoId === video.id.videoId
+    );
+    if (favoriteIndex > -1) {
+      authUser.favorites = authUser.favorites.splice(favoriteIndex, 1);
+    } else {
+      authUser.favorites.push(video);
+    }
+    datasource.updateFavorites(authUser);
+  };
+
   const login = useCallback(
-    (username, password) => {
+    async (username, password) => {
       try {
-        datasource.authenticate(username, password);
+        const user = await datasource.authenticate(username, password);
+        setAuthUser(user);
         setAuthenticated(true);
         history.push('/');
       } catch (error) {
@@ -47,10 +62,13 @@ function AuthProvider({ children }) {
   const logout = useCallback(() => {
     setAuthenticated(false);
     datasource.deAuthenticate();
-  }, [datasource]);
+    history.push('/');
+  }, [datasource, history]);
 
   return (
-    <AuthContext.Provider value={{ login, logout, authenticated }}>
+    <AuthContext.Provider
+      value={{ login, logout, authenticated, authUser, toggleFavorite }}
+    >
       {children}
       <ToastContainer closeOnClick autoClose={5000} />
     </AuthContext.Provider>

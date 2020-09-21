@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 
 import { YoutubeDataSource } from '../../data/datasources/youtube.datasource';
-import { VideoTitle } from './styledComponents';
+import { VideoTitle, RelatedGrid } from './styledComponents';
 
 import VideoDescription from './VideoDescription';
 import Loader from '../../components/Loader';
@@ -33,13 +33,13 @@ const VideoDetailPage = ({ match }) => {
         <Loader />
       ) : (
         <Grid container>
-          <Grid item xs={12} md={6} lg={8}>
+          <Grid item xs={12} md={9}>
             <VideoDescription video={video} />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <RelatedGrid item xs={12} md={3}>
             <VideoTitle>Also try</VideoTitle>
             <RelatedList list={relatedVideos} />
-          </Grid>
+          </RelatedGrid>
         </Grid>
       )}
     </>

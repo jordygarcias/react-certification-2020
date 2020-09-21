@@ -1,14 +1,13 @@
 import axios from 'axios';
 
-const YOUTUBE_API_HOST = 'https://www.googleapis.com/youtube/v3';
-const YOUTUBE_API_KEY = 'AIzaSyDE3JntBY25ZGZI4627iz3U_DuC2QsqhF0';
+const { REACT_APP_YOUTUBE_API_HOST, REACT_APP_YOUTUBE_API_KEY } = process.env;
 
 export const youtubeApi = axios.create({
-  baseURL: YOUTUBE_API_HOST,
+  baseURL: REACT_APP_YOUTUBE_API_HOST,
   params: {
     part: 'snippet',
     maxResults: 10,
-    key: YOUTUBE_API_KEY,
+    key: REACT_APP_YOUTUBE_API_KEY,
   },
 });
 
@@ -18,6 +17,7 @@ const YoutubeDataSource = {
       .get('/search', {
         params: {
           q: searchText,
+          type: 'video',
         },
       })
       .then((res) => res.data.items);
@@ -28,6 +28,7 @@ const YoutubeDataSource = {
       .get('/videos', {
         params: {
           id,
+          type: 'video',
         },
       })
       .then((res) => res.data.items);

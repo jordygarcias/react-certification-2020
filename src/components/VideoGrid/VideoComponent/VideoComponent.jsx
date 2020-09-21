@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -21,11 +21,17 @@ const useTyles = makeStyles((theme) => ({
     width: '100%',
     height: 250,
     [theme.breakpoints.up('sm')]: {
-      height: 120,
+      height: 200,
     },
   },
   cardContent: {
     fontSize: 16,
+    maxHeight: 100,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitLineClamp: 4,
+    WebkitBoxOrient: 'vertical',
   },
 }));
 
@@ -33,6 +39,7 @@ const VideoCard = styled(Card)`
   && {
     background: ${({ theme }) => theme.videoCardBackground};
     color: ${({ theme }) => theme.videoCardTextColor};
+    padding-bottom: 20px;
   }
 `;
 
@@ -47,33 +54,48 @@ const ChannelTitleSection = styled(CardContent)`
 const Video = ({ video }) => {
   const classes = useTyles();
   const data = video.snippet;
+  const { authenticated, toggleFavorite, authUser } = useAuth();
+  const [isInFavorites, setIsInFavorites] = useState(false);
 
-  const { authenticated } = useAuth();
+  useEffect(() => {
+    if (authenticated) {
+      setIsInFavorites(authUser.favorites.find((v) => v.id.videoId === video.id.videoId));
+    }
+  }, []);
+
+  const handleFavorite = () => {
+    toggleFavorite(video);
+    setIsInFavorites(!isInFavorites);
+  };
 
   return (
-    <Link to={`play/${video.id.videoId}`}>
-      <VideoCard>
-        <CardHeader
-          className={classes.header}
-          title={data.title}
-          titleTypographyProps={{ variant: 'body1' }}
-          action={
-            authenticated ? (
-              <IconButton aria-label="Add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-            ) : null
-          }
-        />
-        <ChannelTitleSection>{data.channelTitle}</ChannelTitleSection>
+    <VideoCard>
+      <CardHeader
+        className={classes.header}
+        title={data.title}
+        titleTypographyProps={{ variant: 'body1' }}
+        action={
+          authenticated ? (
+            <IconButton
+              onClick={handleFavorite}
+              aria-label="Add to favorites"
+              style={{ color: isInFavorites ? 'red' : 'grey' }}
+            >
+              <FavoriteIcon />
+            </IconButton>
+          ) : null
+        }
+      />
+      <ChannelTitleSection>{data.channelTitle}</ChannelTitleSection>
+      <Link to={`play/${video.id.videoId}`}>
         <CardMedia
           className={classes.media}
           image={data.thumbnails.medium.url}
           title={data.title}
         />
-        <CardContent className={classes.cardContent}>{data.description}</CardContent>
-      </VideoCard>
-    </Link>
+      </Link>
+      <CardContent className={classes.cardContent}>{data.description}</CardContent>
+    </VideoCard>
   );
 };
 

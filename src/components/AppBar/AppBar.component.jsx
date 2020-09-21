@@ -9,7 +9,7 @@ import { useTheme } from '../../providers/Theme';
 const lightLogo = '/Light_logo.png';
 const darkLogo = '/Dark_logo.png';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   iconContainer: {
     position: 'absolute',
     left: '50%',
@@ -24,6 +24,9 @@ const useStyles = makeStyles(() => ({
   toolbar: {
     justifyContent: 'flex-end',
   },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
 }));
 
 const MainAppBar = () => {
@@ -32,7 +35,7 @@ const MainAppBar = () => {
   const logoSrc = theme === LIGHT_THEME ? lightLogo : darkLogo;
 
   return (
-    <AppBar position="static">
+    <AppBar className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <div className={classes.iconContainer}>
           <img className={classes.icon} src={logoSrc} alt="wizetube logo" />

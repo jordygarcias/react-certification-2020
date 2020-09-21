@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Divider, Grid, IconButton } from '@material-ui/core';
 import { Player, VideoTitle, VideoDescriptionParagraph } from '../styledComponents';
 import { useAuth } from '../../../providers/Auth';
 
 const VideoDescription = ({ video }) => {
-  const { authenticated } = useAuth();
+  const { authenticated, toggleFavorite, authUser } = useAuth();
+  const [isInFavorites, setIsInFavorites] = useState(false);
+
+  useEffect(() => {
+    if (authenticated) {
+      setIsInFavorites(authUser.favorites.find((v) => v.id.videoId === video.id));
+    }
+  }, []);
+
+  const handleFavorite = () => {
+    toggleFavorite({
+      ...video,
+      id: {
+        videoId: video.id,
+      },
+    });
+    setIsInFavorites(!isInFavorites);
+  };
 
   return (
     <>
@@ -16,7 +33,11 @@ const VideoDescription = ({ video }) => {
         </Grid>
         <Grid item xs={2} md={1}>
           {authenticated && (
-            <IconButton aria-label="Add to favorites">
+            <IconButton
+              onClick={handleFavorite}
+              aria-label="Add to favorites"
+              style={{ color: isInFavorites ? 'red' : 'grey' }}
+            >
               <FavoriteIcon />
             </IconButton>
           )}

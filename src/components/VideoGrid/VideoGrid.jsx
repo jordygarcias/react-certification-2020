@@ -2,9 +2,12 @@ import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import VideoComponent from './VideoComponent';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: 0,
+    [theme.breakpoints.up('sm')]: {
+      padding: '0px 20px',
+    },
   },
 }));
 
