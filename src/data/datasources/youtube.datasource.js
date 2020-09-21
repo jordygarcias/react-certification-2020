@@ -22,6 +22,29 @@ const YoutubeDataSource = {
       })
       .then((res) => res.data.items);
   },
+
+  getById: async (id) => {
+    const videos = await youtubeApi
+      .get('/videos', {
+        params: {
+          id,
+        },
+      })
+      .then((res) => res.data.items);
+    const related = await youtubeApi
+      .get('/search', {
+        params: {
+          relatedToVideoId: id,
+          type: 'video',
+        },
+      })
+      .then((res) => res.data.items);
+
+    return {
+      video: videos[0],
+      relatedVideos: related,
+    };
+  },
 };
 
 export { YoutubeDataSource };

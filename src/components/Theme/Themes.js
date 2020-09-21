@@ -4,11 +4,17 @@ export const lightTheme = {
   textColor: '#505050',
   secondaryTextColor: '#979797',
   backgroundColor: '#EFEFEF',
+
   searchBarBorderColor: '#DBDBDB',
   searchBarColor: '#FDFDFD',
   searchBarButtonColor: '#EFEFEF',
+
   navigationBarBackground: '#DEDEDE',
   navigationBarColor: '#1B6D9C',
+
+  videoCardBackground: '#FFF',
+  videoCardTextColor: '#3C3C3C',
+  videoCardChannelTextColor: '#0000008a',
 };
 
 export const darkTheme = {
@@ -17,9 +23,15 @@ export const darkTheme = {
   textColor: '#fff',
   secondaryTextColor: '#E3E3E3',
   backgroundColor: '#7A7A7A',
+
   searchBarBorderColor: '#636363',
   searchBarColor: '#3A3A3A',
   searchBarButtonColor: '#2E2E2E',
+
   navigationBarBackground: '#292929',
   navigationBarColor: '#03A2FF',
+
+  videoCardBackground: '#2E2E2E',
+  videoCardTextColor: '#FFF',
+  videoCardChannelTextColor: '#BBB',
 };

@@ -4,8 +4,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AuthProvider from '../../providers/Auth';
 import Layout from '../Layout';
 
-import NotFound from '../../pages/NotFound';
-import Home from '../../pages/Home';
+import NotFoundPage from '../../pages/NotFound';
+import HomePage from '../../pages/Home';
+import AuthPage from '../../pages/Auth';
+import VideoDetailPage from '../../pages/VideoDetail';
+import FavoritesPage from '../../pages/Favorites';
 
 function App() {
   return (
@@ -13,12 +16,11 @@ function App() {
       <AuthProvider>
         <Layout>
           <Switch>
-            <Route paht="/" exact>
-              <Home />
-            </Route>
-            <Route path="*">
-              <NotFound />
-            </Route>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/auth" component={AuthPage} />
+            <Route path="/play/:id" component={VideoDetailPage} />
+            <Route path="/favorites" component={FavoritesPage} />
+            <Route path="*" component={NotFoundPage} />
           </Switch>
         </Layout>
       </AuthProvider>

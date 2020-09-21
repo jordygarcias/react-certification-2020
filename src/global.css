@@ -49,5 +49,9 @@ a:active {
   color: blueviolet;
 }
 
-hr {
+.loading-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 180px);
 }

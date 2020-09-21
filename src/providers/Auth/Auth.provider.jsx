@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
+import { useHistory } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
 import { AuthLocalDataSource } from '../../data/datasources/auth_local.datasource';
-import { YoutubeDataSource } from '../../data/datasources/youtube.datasource';
+
+import 'react-toastify/dist/ReactToastify.css';
+import { InvalidCredentialsError } from '../../errors/AuthErrors';
 
 const AuthContext = React.createContext(null);
 
@@ -15,13 +19,11 @@ function useAuth() {
 function AuthProvider({ children }) {
   const datasource = AuthLocalDataSource;
   const [authenticated, setAuthenticated] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const lastAuthState = datasource.getActiveSession();
     const isAuthenticated = Boolean(lastAuthState);
-
-    YoutubeDataSource.getVideos();
-
     setAuthenticated(isAuthenticated);
   }, [datasource]);
 
@@ -30,11 +32,16 @@ function AuthProvider({ children }) {
       try {
         datasource.authenticate(username, password);
         setAuthenticated(true);
+        history.push('/');
       } catch (error) {
-        // TODO add toast error
+        if (error instanceof InvalidCredentialsError) {
+          toast.error('Invalid credentials. Try Again!');
+        } else {
+          toast.error('An error has ocurred. Try Again!');
+        }
       }
     },
-    [datasource]
+    [datasource, history]
   );
 
   const logout = useCallback(() => {
@@ -45,6 +52,7 @@ function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={{ login, logout, authenticated }}>
       {children}
+      <ToastContainer closeOnClick autoClose={5000} />
     </AuthContext.Provider>
   );
 }

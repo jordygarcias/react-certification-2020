@@ -3,6 +3,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const BottomBar = styled(BottomNavigation)`
   && {
@@ -24,8 +25,13 @@ const NavigationBar = () => {
   return (
     <Hidden only={['sm', 'md', 'lg', 'xl']}>
       <BottomBar showLabels>
-        <BottomBarAction label="Home" icon={<HomeIcon />} />
-        <BottomBarAction label="Favorites" icon={<FavoriteIcon />} />
+        <BottomBarAction component={Link} to="/" label="Home" icon={<HomeIcon />} />
+        <BottomBarAction
+          component={Link}
+          to="/favorites"
+          label="Favorites"
+          icon={<FavoriteIcon />}
+        />
       </BottomBar>
     </Hidden>
   );
