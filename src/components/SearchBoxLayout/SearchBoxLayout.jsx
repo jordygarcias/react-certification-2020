@@ -46,11 +46,12 @@ const SearchBoxLayout = ({ children, onSearch, searchOnType }) => {
     <>
       <SearchBar component="form">
         <SearchInput
+          data-testid="search-input"
           onChange={(event) => handleSearchTextChange(event.target.value)}
           placeholder={searchOnType ? 'Filter' : 'Search'}
         />
         {!searchOnType && (
-          <SearchButton onClick={() => onSearch(searchText)}>
+          <SearchButton data-testid="search-btn" onClick={() => onSearch(searchText)}>
             <SearchIcon />
           </SearchButton>
         )}
