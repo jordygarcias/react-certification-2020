@@ -25,5 +25,5 @@ function MyThemeProvider({ children }) {
   );
 }
 
-export { useTheme };
+export { useTheme, ThemeToggleContext };
 export default MyThemeProvider;

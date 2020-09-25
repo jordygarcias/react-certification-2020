@@ -10,7 +10,7 @@ import {
 
 const RelatedList = ({ list }) => {
   return list.map((related) => (
-    <Link to={`/play/${related.id.videoId}`} key={related.id.videoId}>
+    <Link role="listitem" to={`/play/${related.id.videoId}`} key={related.id.videoId}>
       <RelatedVideoItem>
         <RelatedVideoImage>
           <img alt={related.snippet.title} src={related.snippet.thumbnails.medium.url} />

@@ -100,4 +100,21 @@ describe('Auth Datasource', () => {
       expect(removeSpy).toBeCalledWith(AUTH_STORAGE_KEY);
     });
   });
+
+  describe('updateFavorites', () => {
+    const mockUser = {
+      username: 'test-user',
+      password: 'test-password',
+    };
+    it('should call storage get & set methods', () => {
+      // arrange
+      storage.get = jest.fn(() => [mockUser]);
+      storage.set = jest.fn();
+      // act
+      AuthLocalDataSource.updateFavorites(mockUser);
+      // assert
+      expect(storage.get).toBeCalled();
+      expect(storage.set).toBeCalled();
+    });
+  });
 });

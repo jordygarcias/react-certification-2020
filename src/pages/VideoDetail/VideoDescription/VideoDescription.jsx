@@ -34,6 +34,7 @@ const VideoDescription = ({ video }) => {
         <Grid item xs={2} md={1}>
           {authenticated && (
             <IconButton
+              data-testid="toggle-favorite-btn"
               onClick={handleFavorite}
               aria-label="Add to favorites"
               style={{ color: isInFavorites ? 'red' : 'grey' }}

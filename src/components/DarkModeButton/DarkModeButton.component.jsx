@@ -9,7 +9,7 @@ const DarkModeButton = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <IconButton onClick={toggleTheme}>
+    <IconButton data-testid="darkmode-btn" onClick={toggleTheme}>
       {theme === LIGHT_THEME ? (
         <Brightness4Icon style={{ color: '#fff' }} />
       ) : (

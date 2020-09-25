@@ -58,6 +58,7 @@ const NavigationBar = () => {
           <BottomBarAction component={Link} to="/" label="Home" icon={<HomeIcon />} />
           {authenticated && (
             <BottomBarAction
+              data-testid="favorites-link"
               component={Link}
               to="/favorites"
               label="Favorites"
@@ -75,7 +76,11 @@ const NavigationBar = () => {
               </ListItemIcon>
             </ListItemStyled>
             {authenticated && (
-              <ListItemStyled component={Link} to="/favorites">
+              <ListItemStyled
+                data-testid="favorites-link"
+                component={Link}
+                to="/favorites"
+              >
                 <ListItemIcon>
                   <FavoriteIcon />
                 </ListItemIcon>

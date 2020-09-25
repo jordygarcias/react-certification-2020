@@ -57,7 +57,7 @@ const AuthPage = () => {
 
   return (
     <section className="auth-section">
-      <form onSubmit={attemptSignIn} className="auth-form">
+      <form data-testid="auth-form" onSubmit={attemptSignIn} className="auth-form">
         <AuthFormLogoContainer>
           <img src={logoSrc} alt="WizeTube" />
         </AuthFormLogoContainer>
@@ -69,7 +69,7 @@ const AuthPage = () => {
           <label htmlFor="password">Password</label>
           <input name="password" type="password" id="password" />
         </section>
-        <SignInButton>Acceder</SignInButton>
+        <SignInButton>Sign in</SignInButton>
       </form>
     </section>
   );

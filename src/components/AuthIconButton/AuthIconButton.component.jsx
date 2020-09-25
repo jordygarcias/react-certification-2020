@@ -31,7 +31,7 @@ const AuthIconButton = () => {
 
   return (
     <>
-      <IconButton onClick={handleMenu}>
+      <IconButton data-testid="authicon-btn" onClick={handleMenu}>
         <AccountCircle style={{ color: '#fff' }} />
       </IconButton>
       <Menu
