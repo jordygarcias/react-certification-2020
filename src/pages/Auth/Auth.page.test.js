@@ -6,6 +6,7 @@ import { ThemeToggleContext } from '../../providers/Theme/Theme.provider';
 import { DARK_THEME, LIGHT_THEME } from '../../utils/constants';
 import AuthProvider from '../../providers/Auth';
 import { AuthContext } from '../../providers/Auth/Auth.provider';
+import { AuthLocalDataSource } from '../../data/datasources/auth_local.datasource';
 
 describe('Auth page', () => {
   it('should render full light logo if darkmode is off', () => {
@@ -53,5 +54,26 @@ describe('Auth page', () => {
     });
     // assert
     expect(mockLogin).toBeCalled();
+  });
+
+  it('should call authenticate from datasource on form submit', () => {
+    // arrange
+    AuthLocalDataSource.authenticate = jest.fn();
+    const component = render(
+      <ThemeToggleContext.Provider value={{ theme: LIGHT_THEME }}>
+        <AuthProvider>
+          <AuthPage />
+        </AuthProvider>
+      </ThemeToggleContext.Provider>
+    );
+    // act
+    fireEvent.submit(component.getByTestId('auth-form'), {
+      target: {
+        username: { value: 'mock-username' },
+        password: { value: 'mock-password' },
+      },
+    });
+    // assert
+    expect(AuthLocalDataSource.authenticate).toBeCalled();
   });
 });
