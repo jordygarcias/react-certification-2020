@@ -35,19 +35,24 @@ const SearchButton = styled(IconButton)`
 const SearchBoxLayout = ({ children, onSearch, searchOnType }) => {
   const [searchText, setSearchText] = useState('');
 
-  const handleSearchTextChange = (value) => {
+  const handleSearchTextChange = (value, forceSearch = false) => {
     setSearchText(value);
-    if (searchOnType) {
+    if (searchOnType || forceSearch) {
       onSearch(value);
     }
   };
 
   return (
     <>
-      <SearchBar component="form">
+      <SearchBar>
         <SearchInput
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleSearchTextChange(e.target.value, true);
+            }
+          }}
           data-testid="search-input"
-          onChange={(event) => handleSearchTextChange(event.target.value)}
+          onChange={(e) => handleSearchTextChange(e.target.value)}
           placeholder={searchOnType ? 'Filter' : 'Search'}
         />
         {!searchOnType && (
