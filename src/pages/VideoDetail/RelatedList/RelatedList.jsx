@@ -6,7 +6,7 @@ import {
   RelatedVideoInfo,
   RelatedVideoTitle,
   RelatedVideoChannelTitle,
-} from '../styledComponents';
+} from '../VideoDetail.style';
 
 const RelatedList = ({ list }) => {
   return list.map((related) => (

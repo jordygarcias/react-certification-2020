@@ -4,6 +4,15 @@ import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useAuth } from '../../providers/Auth';
 
+const menuTransformOrigin = {
+  vertical: 'top',
+  horizontal: 'right',
+};
+const menuAnchorOrigin = {
+  vertical: 'top',
+  horizontal: 'right',
+};
+
 const AuthIconButton = () => {
   const { authenticated } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -39,14 +48,8 @@ const AuthIconButton = () => {
         onClose={handleClose}
         keepMounted
         open={open}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
+        transformOrigin={menuTransformOrigin}
+        anchorOrigin={menuAnchorOrigin}
       >
         {!authenticated && <MenuItem onClick={handleLogin}>Sign in</MenuItem>}
         {authenticated && <MenuItem onClick={handleLogout}>Sign out</MenuItem>}

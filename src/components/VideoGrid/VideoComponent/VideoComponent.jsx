@@ -68,23 +68,28 @@ const Video = ({ video }) => {
     setIsInFavorites(!isInFavorites);
   };
 
+  const HeaderAction = () => {
+    if (authenticated) {
+      return (
+        <IconButton
+          onClick={handleFavorite}
+          aria-label="Add to favorites"
+          style={{ color: isInFavorites ? 'red' : 'grey' }}
+        >
+          <FavoriteIcon />
+        </IconButton>
+      );
+    }
+    return null;
+  };
+
   return (
     <VideoCard>
       <CardHeader
         className={classes.header}
         title={data.title}
         titleTypographyProps={{ variant: 'body1' }}
-        action={
-          authenticated ? (
-            <IconButton
-              onClick={handleFavorite}
-              aria-label="Add to favorites"
-              style={{ color: isInFavorites ? 'red' : 'grey' }}
-            >
-              <FavoriteIcon />
-            </IconButton>
-          ) : null
-        }
+        action={<HeaderAction />}
       />
       <ChannelTitleSection>{data.channelTitle}</ChannelTitleSection>
       <Link to={`play/${video.id.videoId}`}>

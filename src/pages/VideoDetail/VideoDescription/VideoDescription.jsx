@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Divider, Grid, IconButton } from '@material-ui/core';
-import { Player, VideoTitle, VideoDescriptionParagraph } from '../styledComponents';
+import { Player, VideoTitle, VideoDescriptionParagraph } from '../VideoDetail.style';
 import { useAuth } from '../../../providers/Auth';
 
 const VideoDescription = ({ video }) => {

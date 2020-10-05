@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 
 import { YoutubeDataSource } from '../../data/datasources/youtube.datasource';
-import { VideoTitle, RelatedGrid } from './styledComponents';
+import { VideoTitle, RelatedGrid } from './VideoDetail.style';
 
 import VideoDescription from './VideoDescription';
 import Loader from '../../components/Loader';

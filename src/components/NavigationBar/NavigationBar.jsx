@@ -1,52 +1,12 @@
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Drawer,
-  Hidden,
-  List,
-  ListItem,
-  ListItemIcon,
-} from '@material-ui/core';
+import { Hidden, ListItemIcon } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../providers/Auth';
-
-const BottomBar = styled(BottomNavigation)`
-  && {
-    position: fixed;
-    bottom: 0px;
-    background: ${({ theme }) => theme.navigationBarBackground};
-    width: 100%;
-    z-index: 2;
-  }
-`;
-
-const BottomBarAction = styled(BottomNavigationAction)`
-  && {
-    color: ${({ theme }) => theme.navigationBarColor};
-  }
-`;
-
-const DrawerStyled = styled(Drawer)`
-  & > div {
-    background: ${({ theme }) => theme.navigationBarBackground};
-  }
-`;
-
-const ListStyled = styled(List)`
-  width: 60px;
-  padding-top: 70px;
-`;
-
-const ListItemStyled = styled(ListItem)`
-  margin-bottom: 10px;
-  & > div {
-    color: ${({ theme }) => theme.navigationBarColor} !important;
-  }
-`;
+import { BottomBar, BottomBarAction } from './Navigation.style';
+import { DrawerStyled } from './Drawer.style';
+import { ListStyled, ListItemStyled } from './List.style';
 
 const NavigationBar = () => {
   const { authenticated } = useAuth();
